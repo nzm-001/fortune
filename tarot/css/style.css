@@ -21,7 +21,7 @@ h1 {
 
 /* 説明テキスト */
 p {
-  margin: 6px 0;
+  margin: 20px 0;
   font-size: 1rem;
   line-height: 1.6;
 }
@@ -38,19 +38,25 @@ p {
   object-fit: cover;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
   transition: transform 0.5s;
+  --rotation:rotate(0deg);  /* 回転用変数を初期化 */
 }
 
+/* hoverでふわふわ */
 .cardImage img:hover{
     animation: float 1.5s ease-in-out infinite; /* 1.5s … 1サイクルの時間（短くすると速く動く） */
 }
 
 @keyframes float{
-    0%  { transform: translateY(0); }   /* 元の位置 */
-    50% { transform: translateY(-6px); }    /* 少し上に浮く */
-    100%{ transform: translateY(0); }   /* 元の位置に戻る */
+    0%  { transform: var(--rotation) translateY(0); }   /* 元の位置 */
+    50% { transform: var(--rotation) translateY(-8px); }    /* 少し上に浮く */
+    100%{ transform: var(--rotation) translateY(0); }   /* 元の位置に戻る */
 }
 
 /* カードを引くボタン */
+button {
+  font-family: inherit;
+}
+
 #drawButton {
   background: linear-gradient(135deg, #7b68ee, #9370db);
   color: white;
@@ -92,6 +98,7 @@ p {
     opacity: 1;
 }
 
+
 /* カード名 */
 #cardName {
   font-size: 1.3rem;
@@ -108,3 +115,50 @@ p {
   line-height: 1.8;
   white-space: pre-line;
 }
+
+#result {
+  margin-bottom: 20px; /* 結果枠の下に余白を確保 */
+}
+
+/* もう一度占うボタン */
+
+#resetButton {
+  display: none;
+  margin: 20px auto 150px;
+  padding: 5px 25px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #e9e6ff;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: 0.4s ease;
+}
+
+#resetButton::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: skewX(-25deg);
+  transition: 0.5s;
+}
+
+#resetButton:active {
+  transform: scale(0.96);
+}
+
+/* 自動で光るアニメーション用クラス */
+#resetButton.animate::before {
+  animation: shine 2s linear infinite;
+}
+
+@keyframes shine {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+
