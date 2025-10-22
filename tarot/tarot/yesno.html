@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YES or NO タロット占い</title>
+  <link rel="stylesheet" href="css/style.css" >
+  <style>
+  
+    
+  </style>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<h1>YES or NO<br>タロット占い</h1>
+<p>迷いの答えを知りたいとき、<br>心を静めて問いを立てましょう。</p>
+<p>問いが<br>YESかNOで答えられるように整え、<br>カードに委ねてください。</p>
+
+
+  <!-- カード表出エリア -->
+  <div class="cardImage">
+    <img src="images/back2.png" alt="card" width="220" height="380">
+  </div>
+  <p>準備ができたらボタンを押して</p>
+  <!-- カードを引くボタン -->
+  <button id="drawButton">カードを引く</button>
+
+  <!-- 結果表示エリア -->
+  <div class="result" id="result">
+    <p id="cardName"></p>
+    <p id="cardMeaning"></p>
+  </div>
+
+  <!-- もう一度占うボタン -->
+  <button id="resetButton" style="display:none;">もう一度占う</button>
+
+</body>
+</html>
