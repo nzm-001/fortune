@@ -116,11 +116,11 @@ const MAJOR = [
     }
 ]
 
-/* --- ボタンを取得してクリックイベントを設定 --- */
-const drawButton = document.getElementById('drawButton');   //ボタン要素を取得
-drawButton.addEventListener('click', drawCard);             //クリックイベントを設定
+// --- ボタンを取得してクリックイベントを設定 ---
+const drawButton = document.getElementById('drawButton');   //「カードを引く」ボタン
+const resetButton = document.getElementById('resetButton'); //「もう一度占う」ボタン
 
-/* 引いたカードの情報を決める */
+// --- 引いたカードの情報 ---
 let drawnCard;  //選ばれたカード情報を保持
 let isReversed; //正位置か逆位置かの判定
 
@@ -130,26 +130,53 @@ const cardNameElement = document.getElementById('cardName');        //カード�
 const cardMeaningElement = document.getElementById('cardMeaning');  //カードの意味　id="cardMeaning" の要素を取得
 
 function drawCard(){
+
     drawnCard = MAJOR[Math.floor(Math.random()*MAJOR.length)];
-    isReversed = Math.random() < 0.5;
+    isReversed = Math.random() < 0.5;  //正位置・逆位置の確率
+
+    /* cssアニメーションで更新されるカードの回転を逆位置のまま維持する処理 */
+    cardImageElement.style.setProperty( 
+        '--rotation',
+        isReversed ? 'rotate(180deg)':'rotate(0deg)'
+    );
 
     cardImageElement.style.opacity = 0; //フェードアウト
 
     setTimeout(() => {
-        cardImageElement.src = drawnCard.image;         //.imageでMAJOR内のimageを参照
+
+        cardImageElement.src = drawnCard.image;     //カード画像更新　.imageでMAJOR内のimageを参照
         cardImageElement.style.transform = isReversed ? 'rotate(180deg)' : 'rotate(0deg)';    // 逆位置なら画像を回転
         cardNameElement.textContent = drawnCard.name;   //.nameでMAJOR内のテキスト、nameを参照
-        cardImageElement.style.opacity = 1;
     
-        /* 結果：正位置なら upright、逆位置なら reversed を表示 */
-        /* 三項演算子 条件 ? trueの値 : falseの値) */
+        /* 結果を表示する処理　正位置なら upright、逆位置なら reversed を表示 （三項演算子: 条件 ? trueの値 : falseの値） */
         cardMeaningElement.textContent = isReversed ? drawnCard.reversed : drawnCard.upright; 
+        cardImageElement.style.opacity = 1;
 
         /* 結果エリアを表示 */
-        document.getElementById('result').style.padding = '20px 25px';  //0　→　20px 25px
-        document.getElementById('result').style.display = 'block'; //none　→　block
-        document.getElementById('result').classList.add('show') //フェードイン
+        const result = document.getElementById('result');
 
+        result.style.padding = '20px 25px';  //0　→　20px 25px
+        result.style.display = 'block';     //none　→　block
+        result.classList.add('show');       //フェードイン
+
+        drawButton.style.display = 'none';          // 「カードを引く」を非表示
+        resetButton.style.display = 'inline-block'; // 「もう一度占う」を表示
+        resetButton.classList.add('animate');   // 「もう一度占う」ボタンのアニメーション
 
     },250 ); //0.25秒後に切り替え
 }
+    // 「カードを引く」クリック
+    drawButton.addEventListener('click', drawCard);
+
+    // 「もう一度占う」クリック
+    resetButton.addEventListener('click', () => {
+    drawButton.style.display = 'inline-block'; // 元のボタンを戻す
+    resetButton.style.display = 'none';        // リセットボタンを非表示
+    cardImageElement.src = 'images/back2.png'; // カード画像を戻す
+    cardImageElement.style.transform = 'rotate(0deg)'; // 回転もリセット
+    cardNameElement.textContent = '';
+    cardMeaningElement.textContent = '';
+    const result = document.getElementById('result');
+    result.style.padding = '0';
+    result.classList.remove('show');
+});
