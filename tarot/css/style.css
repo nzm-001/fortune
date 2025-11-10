@@ -26,6 +26,30 @@ p {
   line-height: 1.6;
 }
 
+/* 親要素で中央寄せ */
+.examples-wrapper {
+  text-align: center;
+}
+
+/* リストは左揃え */
+ul.examples {
+  display: inline-block;    /* 中央寄せのためインラインブロック */
+  text-align: left;         /* 左揃え */
+  margin: 0;
+  padding-left: 1.2em;      /* 左余白 */
+  list-style-type: none;    /* デフォルトの中黒を消す */
+  font-size: 0.9em;         /* 少し小さめ */
+  color: #ececd4;         /* やわらかいイエロー */
+}
+
+ul.examples li::before {
+  content: "- ";             /* 行頭にハイフン */
+}
+
+ul.examples li {
+  line-height: 1.6;          /* 行間 */
+}
+
 /* カード画像エリア */
 .cardImage {
   margin: 30px auto 20px;
@@ -37,8 +61,8 @@ p {
   border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
-  transition: transform 0.5s;
-  --rotation:rotate(0deg);  /* 回転用変数を初期化 */
+  transition: transform 0.5s; /* JSで回転変更時の滑らかさ */
+  --rotation: rotate(0deg);  /* 回転用変数を初期化 */
 }
 
 /* hoverでふわふわ */
