@@ -76,7 +76,7 @@ const MAJOR = [
     },{
         name:'節制 (Temperance)',
         upright:'答えは条件付き「YES」…！\nバランスが重要\n\nこのカードの意味は\n【調和・中庸・柔軟】\n\n物事が順調に運ばれるための調和が大切を表しています。\nパワフルに進めようとすると、バランスが崩れてしまうこともあるため注意が必要でしょう。\n急がず、自然な流れを意識して行動すれば、うまく事が運ばれます。',
-        reversed:'答えは「NO」…！\n調和しない\n\n節制の逆位置は…\n【不調和・停滞・焦り】\n\nうまく噛み合わない状態や、バランスが崩れている状態です。 \n秩序や協調性も守ってリズムを整え、心身の調和を取り戻しましょう。\n自信を整えることが、状況を安定させる近道です。',
+        reversed:'答えは「NO」…！\n調和しない\n\n節制の逆位置は…\n【不調和・停滞・焦り】\n\nうまく噛み合わない状態や、バランスが崩れている状態です。 \n秩序や協調性も守ってリズムを整え、心身の調和を取り戻しましょう。\n自身を整えることが、状況を安定させる近道です。',
         image:'images/14_Temperance.png' 
     },{
         name:'悪魔 (The Devil)',
@@ -163,6 +163,15 @@ function drawCard(){
         resetButton.style.display = 'inline-block'; // 「もう一度占う」を表示
 
         resetButton.classList.add('animate');   // 「もう一度占う」ボタンのアニメーション
+
+        // GA4イベント送信
+        if (typeof gtag === "function") {
+        gtag("event", "card_draw", {
+            card_name: drawnCard.name,               // カード名
+            position: isReversed ? "reversed" : "upright",  // 正位置 or 逆位置
+            result_text: isReversed ? drawnCard.reversed : drawnCard.upright // 表示内容（任意）
+        });
+}
 
     },250 ); //0.25秒後に切り替え
 }
