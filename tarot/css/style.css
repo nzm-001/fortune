@@ -36,10 +36,10 @@ ul.examples {
   display: inline-block;    /* 中央寄せのためインラインブロック */
   text-align: left;         /* 左揃え */
   margin: 0;
-  padding-left: 1.2em;      /* 左余白 */
+  padding-left: 1em;      /* 左余白 */
   list-style-type: none;    /* デフォルトの中黒を消す */
   font-size: 0.9em;         /* 少し小さめ */
-  color: #ececd4;         /* やわらかいイエロー */
+  color: #d8d1be;         /* やわらかいイエロー */
 }
 
 ul.examples li::before {
