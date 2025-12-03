@@ -164,15 +164,6 @@ function drawCard(){
 
         resetButton.classList.add('animate');   // 「もう一度占う」ボタンのアニメーション
 
-        // GA4イベント送信
-        if (typeof gtag === "function") {
-        gtag("event", "card_draw", {
-            card_name: drawnCard.name,               // カード名
-            position: isReversed ? "reversed" : "upright",  // 正位置 or 逆位置
-            result_text: isReversed ? drawnCard.reversed : drawnCard.upright // 表示内容（任意）
-        });
-}
-
     },250 ); //0.25秒後に切り替え
 }
     // 「カードを引く」クリック
