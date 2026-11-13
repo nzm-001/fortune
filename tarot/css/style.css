@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
-@import url('https://fonts.googleapis.com/earlyaccess/hannari.css');
+@import url('https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap');
 
 body {
   background: radial-gradient(circle at 50% 20%, #565683 0%, #111134 70%);
-  font-family:'Amatic SC','Hina Mincho', serif;
+  font-family: 'Amatic SC','Hina Mincho', serif;
   color: #f8f8ff;
   text-align: center;
   padding: 40px;
